@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrato</title>
+</head>
+<body>
+
+    <h2>Extrato bancário</h2>
+    <h2>Saldo:</h2>
+    <h3 id="h3_saldo">R$0</h3>
+
+    <p>Informe o valor da transação:</p>
+    <input type="numero" id="input_valorTransacao">
+    <br><br>
+    <p>Informe a data da transação:</p>
+    <input type="date" id="input_dtTransacao">
+    <br><br>
+    <button onclick="sacar()">Sacar</button>
+    <button onclick="depositar()">Depositar</button>
+    <br><br>
+    <p id="p_mensagemExtrato"></p>
+    
+</body>
+</html>
+<script>
+    var saldo = 0;
+    var valorTransacao = 0;
+    var dtTransacao = ``;
+    var multa = 0;
+    p_mensagemExtrato.innerHTML = ``;
+
+    function sacar(){
+
+        valorTransacao = Number(input_valorTransacao.value);
+        dtTransacao = input_dtTransacao.value;
+
+        var checkNegativo = saldo - valorTransacao;
+        var multa = 0;        
+
+        if (saldo < 0){
+
+            multa = valorTransacao * 0.01;
+
+            saldo -= (valorTransacao + multa);
+            h3_saldo.innerHTML = `R$${saldo}`;
+            p_mensagemExtrato.innerHTML += `<p style = "color: red"> ${dtTransacao} - -R$${valorTransacao} - <b> Multa de R$${multa} aplicada. </b> - Saldo atual: R$${saldo}`;
+
+        }
+        
+        if (saldo >= 0){
+
+            if (checkNegativo < 0){
+
+                multa = - (0.01 * checkNegativo)
+
+                saldo -= (valorTransacao + multa);
+                h3_saldo.innerHTML = `R$${saldo}`;
+                p_mensagemExtrato.innerHTML += `<p style = "color: red"> ${dtTransacao} - -R$${valorTransacao} - <b> Multa de R$${multa} aplicada. </b> - Saldo atual: R$${saldo} </p>`;
+
+            } else {
+                multa = 0
+
+                saldo -= (valorTransacao + multa);
+                h3_saldo.innerHTML = `R$${saldo}`;
+                p_mensagemExtrato.innerHTML += `<p style = "color: red"> ${dtTransacao} - -R$${valorTransacao} - Saldo atual: R$${saldo} </p>`;
+
+            }
+
+        }
+
+    }
+
+    function depositar() {
+
+        valorTransacao = Number(input_valorTransacao.value);
+        dtTransacao = input_dtTransacao.value;
+        saldo += valorTransacao;
+        h3_saldo.innerHTML = `R$${saldo}`;
+        p_mensagemExtrato.innerHTML += `<p style = "color: green"> ${dtTransacao} - +R$${valorTransacao} - Saldo atual: R$${saldo} </p>`;
+
+
+    }
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio VT</title>
+</head>
+<body>
+
+<p>Qual seu nome?</p>
+<input type="text" id="input_nome">
+<br><br>
+<p>Qual sua idade?</p>
+<input type="number" id="input_idade">
+<br><br>
+<p>Quantas viagens por mês?</p>
+<input type="number" id="input_viagens">
+<br><br>
+<button onclick="calculoVT()">Calcular VT</button>
+<br><br>
+<p id="p_mensagem"></p>
+    
+</body>
+</html>
+<script>
+    function calculoVT() {
+        var nome = input_nome.value;
+        var idade = Number(input_idade.value);
+        var viagens = Number(input_viagens.value);
+        var saldo = 300;
+        var preco = 0;
+        var viagensPossiveis = 0;
+
+        if (idade >= 18) {
+            preco = 5.2;
+            viagensPossiveis = saldo / preco;
+            console.log(viagensPossiveis,saldo,preco);
+        } else {
+            preco = 2.08;
+            viagensPossiveis = saldo / preco;
+            console.log(viagensPossiveis,saldo,preco);
+        }
+
+        if (viagensPossiveis > viagens) {
+            p_mensagem.innerHTML = `Olá, ${nome}! Com o saldo de R$${saldo}, você conseguirá fazer ${viagensPossiveis} viagens. O que supera a quantidade desejada!`
+        } else {
+            alert(`Atenção, ${nome}! Seu saldo não será suficiente para todas as viagens. Com R$${saldo}, você conseguirá fazer apenas ${viagensPossiveis} viagens.`)
+        }
+
+
+
+    }
+</script>
