@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renda</title>
+</head>
+<body>
+    <h2>Análise da renda</h2>
+    <p>Qual o salário?</p>
+    <input type="number" id="input_salario">
+    <p>Qual o adicional mensal?</p>
+    <input type="number" id="input_adicional">
+    <p>Qual o bônus?</p>
+    <input type="number" id="input_bonus">
+    <br><br>
+    <button onclick="renda()">Analisar minha renda</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+    <p id="p_mensagem2"></p>
+    
+</body>
+</html>
+<script>
+
+    function renda() {
+
+        var salario = Number(input_salario.value);
+        var adicional = Number(input_adicional.value);
+        var bonus = Number(input_bonus.value);
+
+        var salarioBruto = salario + adicional + bonus;
+        var IR;
+        var INSS;
+        var FGTS;
+        var salarioLiquido;   
+
+        if(salarioBruto >= 10000){
+            IR = 10000 * 0.125;
+        } else {
+            IR = 0;
+        }
+
+        INSS = (salarioBruto - IR) * 0.1;
+        FGTS = (salarioBruto - IR) * 0.08;
+
+        salarioLiquido = salarioBruto - IR - INSS - FGTS;
+
+        p_mensagem.innerHTML = `            <b>ANÁLISE DA SUA RENDA</b><br><br>
+
+            Com o salário de <b>R$${salario}</b>, com adicional de <b>R$${adicional}</b> e bônus de <b>R$${bonus}</b>, você tem:<br><br>
+
+            Bruto: <b>R$${salarioBruto}</b><br><br>
+
+            IR: <b>R$${IR}</b><br><br>
+
+            INSS: <b>R$${INSS}</b><br><br>
+
+            FGTS: <b>R$${FGTS}</b><br><br>
+
+            Líquido: <b>R$${salarioLiquido}</b>`
+        
+        if(salarioLiquido >= 2500) {
+
+            var poupancaMensal = salarioLiquido * 0.15;
+            var poupancaTotal = poupancaMensal * 12;
+
+            p_mensagem2.innerHTML = `Com a renda de <b>R$${salarioLiquido}</b>, é recomendado poupar <b>R$${poupancaMensal}</b>, para que em um ano tenha poupado <b>R$${poupancaTotal}</b>`
+
+        } else {
+
+            p_mensagem2.innerHTML = `Com a renda de R$${salarioLiquido}, é recomendado obter renda extra para realizar uma poupança.`
+
+        }
+
+    }
+
+</script>

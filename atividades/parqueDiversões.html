@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parque de diversões</title>
+
+    <style>
+
+        h1{
+            color: brown;
+            background-color: bisque;
+            border-color: black;
+            font-family: 'Courier New', Courier, monospace;
+            width: 800px;
+            border-radius: 500px;
+        }
+
+        p{
+            color: brown;
+            font-family: 'Courier New', Courier, monospace;        
+            font-weight: bold;
+
+        }
+
+        button {
+            color: brown;
+            font-weight: bold;
+            background-color: bisque;
+            width: fit-content;
+            border-radius: 15%;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bolder;
+        }
+
+        input {
+            background-color: lightgoldenrodyellow;
+        }
+
+        select {
+            background-color: lightgoldenrodyellow;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>Sistema de entrada - Parque de diversões</h1>
+    <p>Qual seu nome?</p>
+    <input type="text" id="input_nome">
+    <p>Qual sua idade?</p>
+    <input type="text" id="input_idade">
+    <p>Qual sua altura? (em metros)</p>
+    <input type="number" id="input_altura">
+    <p>Está acompanhado pelos pais?</p>
+    <select name="" id="select_pais">
+
+        <option>Sim</option>
+        <option>Não</option>
+        
+    </select>
+    <br><br>
+    <button onclick="validar()">Validar</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+
+</body>
+</html>
+<script>
+
+function validar(){
+
+    var nome = input_nome.value;
+    var idade = Number(input_idade.value);
+    var altura = Number(input_altura.value);
+    var pais = select_pais.value;
+
+    if (altura >= 1.5 && (idade >= 18 || pais == `Sim`)) {
+
+        p_mensagem.innerHTML = `O visitante ${nome} pode entrar no parque! <br>`;
+
+    } else {
+        p_mensagem.innerHTML = `O visitante ${nome} não pode entrar no parque! <br>`
+        
+    }}
+
+</script>
