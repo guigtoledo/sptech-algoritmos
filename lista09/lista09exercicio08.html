@@ -10,7 +10,7 @@
 <body>
     <p>Informe um número</p>
     <input type="number" id="input_num">
-    <p>Informe um número</p>
+    <p>Informe uma frase</p>
     <input type="text" id="input_frase">
     <br><br>
     <button onclick="contar()">Papagaio</button>
@@ -26,11 +26,25 @@
         var numero = Number(input_num.value);
         var frase = input_frase.value;
         var contador = 0;
+        var mensagem = " ";
+
+        
+
+        while (contador < numero){
+
+            mensagem += frase + " "; 
+
+            contador++
+
+        }
+
+        contador = 0;
 
         while (contador < numero) {
 
             contador++
-            p_mensagem.innerHTML += `${frase}<br>`;
+
+            alert(mensagem);
 
         }
     }
