@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doceria Gourmet</title>
+</head>
+<body>
+    
+    <p>Informe a quantidade de Macarons: </p>
+    <input type="number" id="input_Macaron"><br>
+    <p>Informe o preço de cada unidade:</p> 
+    <input type="number" id="input_precoMacaron"><br>
+    <p>Informe a quantidade de Brigadeiros Gourmets:</p> 
+    <input type="number" id="input_Brigadeiro"><br>
+    <p>Informe o preço de cada unidade:</p> 
+    <input type="number" id="input_precoBrigadeiro"><br>
+    <p>Informe a quantidade de Cupcakes: </p>
+    <input type="number" id="input_Cupcake"><br>
+    <p>Informe o preço de cada unidade:</p> 
+    <input type="number" id="input_precoCupcake"><br>
+    <p>Informe a quantidade de Cheesecakes: </p>
+    <input type="number" id="input_Cheesecake"><br>
+    <p>Informe o preço de cada unidade:</p> 
+    <input type="number" id="input_precoCheesecake"><br><br>
+
+    <button onclick="verificar()">Verificar vendas</button><br>
+
+    <p id="p_mensagem"></p>
+
+</body>
+</html>
+<script>
+
+    function verificar(){
+
+        var Macaron = Number(input_Macaron.value);
+        var precoMacaron = Number(input_precoMacaron.value);
+        var Brigadeiro = Number(input_Brigadeiro.value);
+        var precoBrigadeiro = Number(input_precoBrigadeiro.value);
+        var Cupcake = Number(input_Cupcake.value);
+        var precoCupcake = Number(input_precoCupcake.value);
+        var Cheesecake = Number(input_Cheesecake.value);
+        var precoCheesecake = Number(input_precoCheesecake.value);
+
+        var valorTotal = (Macaron * precoMacaron) + (Brigadeiro * precoBrigadeiro) + (Cupcake * precoCupcake) + (Cheesecake * precoCheesecake);
+
+        var imgMacaron = `<img style="width:30px; height:30px;" src="https://img.freepik.com/fotos-premium/macaroons-frescos-isolados-no-fundo-branco-macaron-frances-doce-e-colorido_157837-2707.jpg">`;
+        var imgBrigadeiro = `<img style = "width: 30px; height: 30px;" src= "https://img.freepik.com/fotos-premium/brigadeiro-tipico-brasileiro-isolado-sobre-fundo-branco_92534-1875.jpg">`;
+        var imgCupcake = `<img style = "width: 30px; height: 30px;" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfmYlA49WPpY_XFbQAF11_j0XhPVQ8UsH52Q&s">`;
+        var imgCheesecake = `<img style = "width: 30px; height: 30px;" src= "https://img.freepik.com/fotos-premium/pedaco-de-cheesecake-de-limao-isolado-no-fundo-branco_93675-123224.jpg">`;
+
+        if (Macaron >= 0 && precoMacaron >= 0 && Brigadeiro >= 0 && precoBrigadeiro >= 0 && Cupcake >= 0 && precoCupcake >= 0 && Cheesecake >= 0 && precoCheesecake >= 0){
+
+            var mensagem = "";
+            var venda = 0
+            var contador = 0;
+
+            if(Macaron > 0) {
+                
+                contador = 0;
+
+                while (contador < Macaron) {
+
+                    venda++;
+                    contador++;
+
+                    mensagem += `Venda ${venda}   -   ${imgMacaron}   -   R$${precoMacaron}<br>`
+                    
+                }
+
+            }
+
+            if(Brigadeiro > 0) {
+                
+                contador = 0;
+
+                while (contador < Brigadeiro) {
+
+                    venda++;
+                    contador++;
+
+                    mensagem += `Venda ${venda}   -   ${imgBrigadeiro}   -   R$${precoBrigadeiro}<br>`
+                    
+                }
+
+            }
+
+            if(Cupcake > 0) {
+                
+                contador = 0;
+
+                while (contador < Cupcake) {
+
+                    venda++;
+                    contador++;
+
+                    mensagem += `Venda ${venda}   -   ${imgCupcake}   -   R$${precoCupcake}<br>`
+                    
+                }
+
+            }
+
+            if(Cheesecake > 0) {
+                
+                contador = 0;
+
+                while (contador < Cheesecake) {
+
+                    venda++;
+                    contador++;
+
+                    mensagem += `Venda ${venda}   -   ${imgCheesecake}   -   R$${precoCheesecake}<br>`
+                    
+                }
+
+            }
+
+            mensagem += `<br> Com a quantidade de ${Macaron} Macarons, ${Brigadeiro} Brigadeiros, ${Cupcake} Cupcakes e ${Cheesecake} Cheesecakes, a venda totalizará R$${valorTotal}.`
+            p_mensagem.innerHTML = mensagem;
+            
+        } else {
+
+            alert(`Valores incorretos. Todas os campos devem ter valores maiores ou iguais a 0.`);
+
+        }
+
+    }
+
+</script>

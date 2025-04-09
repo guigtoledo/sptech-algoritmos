@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri/Penta</title>
+</head>
+<body>
+    
+    <p>Informe o primeiro número do intervalo:</p>
+    <input type="number" id="input_n1">
+    <p>Informe o segundo número do intervalo:</p>
+    <input type="number" id="input_n2">
+    <br><br>
+    <button onclick="func()">Curto 3 e 5!</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+
+</body>
+</html>
+<script>
+
+    function func() {
+
+        var n1 = Number(input_n1.value);
+        var n2 = Number(input_n2.value);
+
+        var contador = n1;
+        var mensagem = "";
+
+        while (contador <= n2) {
+
+            if(contador % 3 == 0 && contador % 5 == 0) {
+
+                mensagem += `É TRI!É PENTA!<br>`;
+
+            } else if (contador % 3 == 0) {
+
+                mensagem += `É TRI!<br>`;
+
+            } else if (contador % 5 == 0) {
+            
+                mensagem += `É PENTA!<br>`;
+            
+            } else {
+            
+                mensagem += `${contador}<br>`
+            
+            }
+
+            contador++;
+
+        }
+        
+        p_mensagem.innerHTML = `<b>${mensagem}</b>`;
+
+    }
+
+</script>
