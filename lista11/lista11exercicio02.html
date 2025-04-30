@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Times</title>
+</head>
+<body>
+    <button onclick="sortear()">Sortear time</button>
+    <p id="p_mensagem"></p>
+</body>
+</html>
+<script>
+
+    function sortear() {
+
+        var numero = Math.random()
+        var mensagem = ""
+        var imagem = ""
+        var imgSccp = "https://upload.wikimedia.org/wikipedia/pt/b/b4/Corinthians_simbolo.png"
+        var imgSep = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Palmeiras_logo.svg/2048px-Palmeiras_logo.svg.png"
+        var imgSpfc = "https://upload.wikimedia.org/wikipedia/commons/4/4b/S%C3%A3o_Paulo_Futebol_Clube.png "
+        var imgSfc = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Santos_logo.svg/2090px-Santos_logo.svg.png"
+
+        if (numero <= 0.25) {
+
+            imagem = imgSccp;
+            mensagem = `<img src="${imagem}" height="150px" width="150px">`
+
+        } else if (numero > 0.25 && numero <= 0.5) {
+
+            imagem = imgSep;
+            mensagem = `<img src="${imagem}" height="150px" width="150px">`
+
+        } else if (numero > 0.5 && numero <= 0.75) {
+
+            imagem = imgSpfc
+            mensagem = `<img src="${imagem}" height="150px" width="150px">`
+
+        } else {
+
+            imagem = imgSfc
+            mensagem = `<img src="${imagem}" height="150px" width="150px">`
+
+        }
+
+        p_mensagem.innerHTML = mensagem;
+
+    }
+
+</script>
