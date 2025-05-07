@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linhas de ônibus</title>
+</head>
+<body>
+    <p>Informe a linha de ônibus</p>
+    <input type="text" id="input_linha">
+    <button onclick="gravar()">Gravar busão</button>
+    <br>
+    <p>Pesquisar linha</p>
+    <input type="text" id="input_pesquisa">
+    <button onclick="pesquisar()" >Pesquisar</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+</body>
+</html>
+<script>
+
+    var linhas = [];
+    
+    function gravar() {
+
+        var mensagem = "";
+        var linha = input_linha.value;
+
+        linhas.push(linha);
+
+        for(var i = linhas.length; i > 0; i--) {
+
+            mensagem += `${i}. ${linhas[i - 1]}<br>`
+
+        }
+
+        p_mensagem.innerHTML = mensagem;
+
+    }
+
+    function pesquisar() {
+
+        var mensagem = "";
+        var posicaoViagens = "";
+        var sinal = ""
+        var viagens = 0;
+        var pesquisa = input_pesquisa.value;
+
+        if(linhas.includes(pesquisa)){
+
+            for(var i = 0; i <= linhas.length; i++ ){
+                if(linhas[i] == pesquisa){
+
+                    var array = []
+
+                    viagens++
+                    posicaoViagens += `${i+1},`
+
+                }
+            }
+
+            mensagem = `Você já pegou essa linha ${viagens} vez(es), nessa ordem: ${posicaoViagens}`
+
+        } else {
+
+            mensagem = `Você nunca pegou essa linha.`
+
+        }
+
+        p_mensagem.innerHTML = mensagem;
+
+    }
+
+</script>

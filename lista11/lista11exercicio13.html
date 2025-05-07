@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperatura</title>
+</head>
+<body>
+    
+    <button onclick="temperatura()">Sortear temperatura</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+
+</body>
+</html>
+<script>
+
+    function temperatura() {
+
+        var mensagem = "";
+        var random = parseInt(Math.random() * 41 -20);
+
+        if (random < 1){
+
+            mensagem = `Temperatura sorteada: ${random}°C<br><br>Dá pra conservar qualquer alimento.`
+
+        } else if (random <= 10) {
+
+            mensagem = `Temperatura sorteada: ${random}°C<br><br>Conserva a maioria dos alimentos.`
+
+        } else {
+
+            mensagem = `Temperatura sorteada: ${random}°C<br><br>Estraga a maioria dos alimentos.`
+
+        }
+
+        p_mensagem.innerHTML = mensagem;
+
+    }
+
+</script>

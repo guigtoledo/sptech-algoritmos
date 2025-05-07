@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmes favoritos 4.0</title>
+</head>
+<body>
+    
+    <p>Informe seu filme favorito:</p>
+    <input type="text" id="input_filme">
+    <br><br>
+    <button onclick="cadastrar()">Cadastrar filme</button>
+    <br><br>
+    <p id="p_mensagem1"></p>
+
+</body>
+</html>
+<script>
+
+    var lista = [];
+
+    function cadastrar(){
+
+        var mensagem = "";
+        var filme = input_filme.value;
+
+        lista.push(filme);
+
+        var ranking = 1;
+    
+        for (var i = 0; i < lista.length; i++) {
+
+            if(i % 2 == 0){
+    
+                mensagem += `<span style="color:blue;">${ranking}. ${lista[i]}</span><br>`
+                
+            } else {
+                
+                mensagem += `<span style="color:red;">${ranking}. ${lista[i]}</span><br>`
+                
+            }
+            
+            ranking ++
+            
+        }
+        
+        p_mensagem1.innerHTML = mensagem;
+
+    }
+
+</script>

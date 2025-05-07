@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de projetos</title>
+</head>
+<body>
+    <p>Informe o nome do projeto</p>
+    <input type="text" id="input_nomeProjeto">
+    <button onclick="registrar()">Registrar projeto</button>
+    <br><br>
+    <button onclick="mostrar()">Mostrar projetos</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+</body>
+</html>
+<script>
+    var projetos = []
+    var qtdProjetos;
+
+    function registrar(){
+
+        var mensagem = "";
+        var nivel = "";
+        var nome = input_nomeProjeto.value;
+
+        projetos.push(nome);
+
+        qtdProjetos = projetos.length;
+
+        if(qtdProjetos <= 4) {
+
+            nivel = "júnior";
+
+        } else if (qtdProjetos <= 12) {
+
+            nivel = "pleno"
+            
+        } else {
+
+            nivel = "sênior"
+
+        }
+
+        mensagem = `Você já fez ${qtdProjetos} projeto(s). Por isso você é um profissional ${nivel}.`
+
+        p_mensagem.innerHTML = mensagem;
+
+
+    }
+
+    function mostrar() {
+
+        mensagem = "";
+
+        for(var i = qtdProjetos; i > 0; i--) {
+
+            mensagem += `${i}. ${projetos[i - 1]}<br>`
+
+        }
+
+        p_mensagem.innerHTML = mensagem;
+
+    }
+</script>

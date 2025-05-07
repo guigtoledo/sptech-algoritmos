@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button onclick="avaliar()">Avaliar</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+    <br>
+    <button onclick="media()">Verificar média</button>
+    <p id="p_mensagem2"></p>
+
+</body>
+</html>
+<script>
+
+    var somaMedia = 0;
+    var contadorMedia = 0;
+    
+    var muitoTriste = `<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi1FHzZ3oZ4c6tkx1tJU94WF_rl7SJlx8fZw&s" style="height: 100px; width: 100px;">`;
+    var meioTriste = `<img src="https://png.pngtree.com/png-clipart/20240826/original/pngtree-clipart-of-sad-emoji-png-image_15854157.png" style="height: 100px; width: 100px;">`;
+    var neutro = `<img src="https://p.turbosquid.com/ts-thumb/p0/fQiYXV/nh8krJs7/1/png/1556106772/600x600/turn_fit_q87/4834eec036b61ea2e8bbe5f7484fa5978ff9096d/1-1.jpg" style="height: 100px; width: 100px;">`;
+    var feliz = `<img src="https://cdn3d.iconscout.com/3d/premium/thumb/cara-feliz-emoji-8832282-7148889.png" style="height: 100px; width: 100px;">`;
+    var muitoFeliz = `<img src="https://cdn3d.iconscout.com/3d/premium/thumb/feliz-emoji-8832189-7148892.png?f=webp" style="height: 100px; width: 100px;">`;
+
+
+    function avaliar() {
+
+        var mensagem = "";
+        var random = Math.random() * 5;
+
+        if(random <= 0.5) {
+
+            mensagem = `Nota recebida: ${random.toFixed(1)}<br><br>${muitoTriste}`
+
+        } else if (random <= 1.5) {
+
+            mensagem = `Nota recebida: ${random.toFixed(1)}<br><br>${meioTriste}`
+
+        } else if (random <= 3.5) {
+            
+            mensagem = `Nota recebida: ${random.toFixed(1)}<br><br>${neutro}`
+            
+        } else if (random <= 4.5) {
+            
+            mensagem = `Nota recebida: ${random.toFixed(1)}<br><br>${feliz}`
+            
+        } else {
+
+            mensagem = `Nota recebida: ${random.toFixed(1)}<br><br>${muitoFeliz}`
+
+        }
+
+        somaMedia += random.toFixed(1);
+        contadorMedia ++
+        p_mensagem.innerHTML = mensagem;
+
+    }
+
+    function media() {
+
+        var media = somaMedia / contadorMedia
+        var mensagem2 = ""
+
+        if(media <= 0.5) {
+
+            mensagem2 = `Nota recebida: ${media.toFixed(1)}<br><br>${muitoTriste}`
+
+        } else if (media <= 1.5) {
+
+            mensagem2 = `Nota recebida: ${media.toFixed(1)}<br><br>${meioTriste}`
+
+        } else if (media <= 3.5) {
+            
+            mensagem2 = `Nota recebida: ${media.toFixed(1)}<br><br>${neutro}`
+            
+        } else if (media <= 4.5) {
+            
+            mensagem2 = `Nota recebida: ${media.toFixed(1)}<br><br>${feliz}`
+            
+        } else {
+
+            mensagem2 = `Nota recebida: ${media.toFixed(1)}<br><br>${muitoFeliz}`
+
+        }
+
+        p_mensagem2.innerHTML = mensagem2;
+
+    }
+
+</script>

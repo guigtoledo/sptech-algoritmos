@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diário de Viagens</title>
+</head>
+
+<body>
+
+    <p>Destino de viagem:</p>
+    <input type="text" id="input_destino">
+    <br><br>
+    <button onclick="adicionar()">Adicionar</button><br><br>
+    <p id="p_mensagem"></p>
+    <button onclick="viagem1()">Primeira viagem</button><br><br>
+    <button onclick="viagem3()">Terceira viagem</button><br><br>
+    <button onclick="ultimaViagem()">Última viagem</button><br><br>
+    <p id="p_mensagem2"></p>
+
+</body>
+
+</html>
+<script>
+
+    var lista = []
+
+    function adicionar() {
+
+        var destino = input_destino.value;
+
+        lista.push(destino);
+
+        p_mensagem.innerHTML = `Destino adicionado com sucesso!`
+
+    }
+
+    function viagem1() {
+
+        if (lista[0] != undefined) {
+
+            p_mensagem2.innerHTML = `${lista[0]}`
+
+        } else {
+
+            p_mensagem2.innerHTML = `Ainda não viajou`;
+
+        }
+
+    }
+
+    function viagem3() {
+
+        if (lista[2] != undefined) {
+
+            p_mensagem2.innerHTML = `${lista[2]}`
+
+        } else {
+
+            p_mensagem2.innerHTML = `Ainda não fez a terceira viagem`;
+
+        }
+
+    }
+
+
+    function ultimaViagem() {
+
+        if (lista[(lista.length) - 1] != undefined) {
+
+            p_mensagem2.innerHTML = `${lista[(lista.length) - 1]}`
+
+        } else {
+
+            p_mensagem2.innerHTML = `Ainda não viajou`;
+
+        }
+
+    }
+</script>

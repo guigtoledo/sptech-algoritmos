@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de dados</title>
+</head>
+<body>
+
+    <button onclick="dadoJ1()">Dado jogador 1</button>
+    <br><br>
+    <div id="div_mensagemJ1" style="display: flex;"></div>
+    <br>
+    <button onclick="dadoJ2()">Dado jogador 2</button>
+    <br><br>
+    <div id="div_mensagemJ2" style="display: flex;"></div>
+    <br>
+    <button onclick="comparar()">Comparar Resultados</button>
+    <br><br>
+    <div id="div_resultado" style="font-weight: bold;"></div>
+</body>
+</html>
+<script>
+
+    var randomJ1 = 0;
+    var randomJ2 = 0;
+
+    function dadoJ1() {
+
+        randomJ1 = parseInt(Math.random() * 6 + 1)
+
+        div_mensagemJ1.innerHTML = `<div style="display:flex; height:50px; width:50px; border: 1px solid black; justify-content:center; align-items: center; font-weight: bold;">${randomJ1}</div>`
+
+    }
+
+    function dadoJ2() {
+
+        randomJ2 = parseInt(Math.random() * 6 + 1)
+
+        div_mensagemJ2.innerHTML = `<div style="display:flex; height:50px; width:50px; border: 1px solid black; justify-content:center; align-items: center; font-weight: bold;">${randomJ2}</div>`
+
+    }
+
+    function comparar() {
+
+        if(randomJ1 > randomJ2) {
+
+            div_resultado.innerHTML = `Jogador 1 venceu!`
+
+        } else if (randomJ2 > randomJ1) {
+
+            div_resultado.innerHTML = `Jogador 2 venceu!`
+
+        } else {
+
+            div_resultado.innerHTML = `Empate!`
+
+        }
+    }
+
+</script>

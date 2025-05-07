@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números</title>
+</head>
+<body>
+    <p id="p_contador1">Números pares:</p>
+    <p id="p_contador2">Números ímpares:</p>
+    <br>
+    <button onclick="sortear()">Sortear número</button>
+    <br>
+    <p id="p_mensagem"></p>
+</body>
+</html>
+<script>
+
+    var contadorPar = 0;
+    var contadorImpar = 0;
+
+    function sortear() {
+
+        var mensagem = "";
+        var random = parseInt(Math.random() * 22 - 30);
+
+        p_mensagem.innerHTML = random;
+
+        if(random % 2 == 0) {
+
+            contadorPar++
+            p_contador1.innerHTML = `Números pares: ${contadorPar}`
+
+        } else {
+
+            contadorImpar++
+            p_contador2.innerHTML = `Números ímpares: ${contadorImpar}`
+        }
+    }
+
+</script>

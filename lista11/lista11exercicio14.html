@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lua</title>
+</head>
+<body>
+    
+    <button onclick="lua()">Ver a lua</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+
+</body>
+</html>
+<script>
+
+    function lua() {
+
+        var mensagem = "";
+        var random = parseInt(Math.random() * 31 +1);
+
+        if (random <= 7){
+
+            mensagem = `Dia: ${random}<br><br>Lua nova.`
+
+        } else if (random <= 16) {
+
+            mensagem = `Dia: ${random}<br><br>Lua cheia.`
+
+        } else if (random <= 22){
+
+            mensagem = `Dia: ${random}<br><br>Lua minguante.`
+
+        } else {
+
+            mensagem = `Dia: ${random}<br><br>Lua crescente.`
+
+        }
+
+        p_mensagem.innerHTML = mensagem;
+
+    }
+
+</script>
