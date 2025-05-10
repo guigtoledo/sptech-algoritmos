@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de estoque</title>
+</head>
+<body>
+    <p>Qual o preço do produto?</p>
+    <input type="number" id="input_preco">
+    <button onclick="registrar()">Registrar produto</button>
+    <br><br>
+    <button onclick="atualizar()">Atualizar estoque</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+</body>
+</html>
+<script>
+    var produtos = [];
+
+    function registrar() {
+        var preco = Number(input_preco.value);
+
+        produtos.push(preco);
+
+        p_mensagem.innerHTML = `Produto registrado com sucesso!`
+    }
+
+    function atualizar(){
+        var qtdProdutos = produtos.length;
+        var somaValor = 0;
+        
+        for(var i = produtos.length; i > 0; i--){
+            somaValor += produtos[i-1]
+        }
+        
+        p_mensagem.innerHTML = `Você tem ${qtdProdutos} produtos cadastrados em estoque.  
+                                <br><br>
+                                Seu estoque vale R$${somaValor}!`
+
+    }
+</script>
