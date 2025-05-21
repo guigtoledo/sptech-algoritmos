@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo - Sete e Meio</title>
+</head>
+<body>
+    <div id="div_botao_iniciar">
+        <button onclick="iniciar()">Jogar Sete e Meio</button>
+    </div>
+    <br><br>
+    <div id="div_resultado"></div>
+    <div id="div_botao_retornar"></div>
+</body>
+</html>
+<script>
+    var cartas = ['Ás',2,3,4,5,6,7,'Dama','Valete','Rei']
+
+    var naipes = ['Copas','Espadas','Ouro','Paus']
+
+    var historico_cartas_jogador = [0]
+    var historico_naipe_jogador = [""]
+    var soma_jogador = 0
+
+    var historico_cartas_banca = [0]
+    var historico_naipe_banca = [""]
+    var soma_banca = 0
+
+    function iniciar(){
+        div_botao_iniciar.innerHTML = `<button onclick="nova_carta()">Pedir outra carta</button> <button onclick="passar_vez()">Passar vez</button>`
+        div_resultado.innerHTML = ``
+        div_botao_retornar.innerHTML = ``
+
+        historico_cartas_jogador = [0]
+        historico_naipe_jogador = [""]
+        soma_jogador = 0
+
+        historico_cartas_banca = [0]
+        historico_naipe_banca = [""]
+        soma_banca = 0
+
+        nova_carta()
+    }
+    function retornar(){
+        div_botao_iniciar.innerHTML = `<button onclick="iniciar()">Jogar Sete e Meio</button>`
+    }
+    function nova_carta(){
+
+        var carta_sorteada = 0
+        var naipe_sorteado = 0
+        var diferente = false
+
+        while(diferente == false){
+
+        carta_sorteada = cartas[parseInt(Math.random() * cartas.length)]
+        naipe_sorteado = naipes[parseInt(Math.random() * naipes.length)]
+
+            for(var i = 0; i < historico_cartas_jogador.length ; i++){
+
+                if(carta_sorteada == historico_cartas_jogador[i] && naipe_sorteado == historico_naipe_jogador[i]){
+                    diferente = false
+                    break
+                } else {
+                    diferente = true
+               }
+            }
+        }
+
+        historico_cartas_jogador.push(carta_sorteada)
+        historico_naipe_jogador.push(naipe_sorteado)
+
+        var valor_carta = 0
+
+        if(carta_sorteada == `Ás`){
+            valor_carta = 1;
+        } else if (carta_sorteada == `Dama` || carta_sorteada == `Valete` || carta_sorteada == `Rei`) {
+            valor_carta = 0.5;
+        } else{
+            valor_carta = carta_sorteada
+        }
+
+        soma_jogador += valor_carta
+
+        div_resultado.innerHTML += `(${soma_jogador} pontos) - ${carta_sorteada} de ${naipe_sorteado}<br><br>`
+
+        if (soma_jogador > 7.5){
+            div_resultado.innerHTML += `O JOGADOR ESTOUROU! A banca venceu com ${soma_banca} pontos`
+            retornar()
+        } else if (soma_jogador == 7.5) {
+            div_resultado.innerHTML += `SETE E MEIO! O jogador venceu com 7.5 pontos!`
+            retornar()
+        }
+    }
+    function passar_vez(){
+
+        div_resultado.innerHTML += `Hora da banca!<br>`
+
+        var carta_sorteada = 0
+        var naipe_sorteado = 0
+        var diferente = false
+
+        while(soma_banca <= soma_jogador){
+
+            diferente = false
+
+            while(diferente == false){
+
+                carta_sorteada = cartas[parseInt(Math.random() * cartas.length)]
+                naipe_sorteado = naipes[parseInt(Math.random() * naipes.length)]
+
+                for(var i = 0; i < historico_cartas_banca.length ; i++){
+
+                    if(carta_sorteada == historico_cartas_banca[i] && naipe_sorteado == historico_naipe_banca[i]){
+                        diferente = false
+                        break
+                    } else {
+                        diferente = true
+                   }
+                }
+            }
+
+            historico_cartas_banca.push(carta_sorteada)
+            historico_naipe_banca.push(naipe_sorteado)
+
+            var valor_carta = 0
+
+            if(carta_sorteada == `Ás`){
+                valor_carta = 1;
+            } else if (carta_sorteada == `Dama` || carta_sorteada == `Valete` || carta_sorteada == `Rei`) {
+                valor_carta = 0.5;
+            } else{
+                valor_carta = carta_sorteada
+            }
+
+            soma_banca += valor_carta
+
+            div_resultado.innerHTML += `(${soma_banca} pontos) - ${carta_sorteada} de ${naipe_sorteado}<br><br>`
+
+        }
+
+        if(soma_banca < 7.5){
+            div_resultado.innerHTML += `A banca venceu com ${soma_banca} pontos!`
+            retornar()
+        } else if(soma_banca == 7.5){
+            div_resultado.innerHTML += `SETE E MEIO! A banca venceu com 7.5 pontos!`
+            retornar()
+        } else{
+            div_resultado.innerHTML += `A BANCA ESTOUROU! O jogador venceu com ${soma_jogador} pontos!`
+            retornar()
+        }
+    }
+</script>
+
