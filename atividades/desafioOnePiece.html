@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Piece</title>
+</head>
+<body>
+    <h3>Cadastrar estoque de comida</h3>
+    <input type="text" id="input_comida">
+    <button onclick="cadastrar()">Cadastrar produto</button>
+    <button onclick="verificar_qtd()">Verificar quantidade</button>
+    <br>
+    <h3>Pesquisar</h3>
+    <input type="text" id="input_pesquisa">
+    <button onclick="pesquisar()">Pesquisar</button>
+    <button onclick="exibir_estoque()">Exibir estoque</button>
+    <br>
+    <h3>Alterar</h3>
+    Nome atual:<br><br>
+    <input type="text" id="input_nome_atual"><br><br>
+    Novo nome:<br><br>
+    <input type="text" id="input_nome_novo"><br><br>
+    <button onclick="alterar_nome()">Alterar nome</button>
+    <h3>Remover</h3>
+    <input type="text" id="input_remover"><br><br>
+    <button onclick="remover()">Remover do estoque</button>
+    <p id="p_mensagem"></p>
+</body>
+</html>
+<script>
+    var estoque = []
+
+    function cadastrar(){
+        var comida = input_comida.value
+
+        estoque.push(comida)
+
+        p_mensagem.innerHTML = `Comida cadastrada com sucesso!`
+    }
+
+    function verificar_qtd(){
+        var mensagem = ``
+        var quantidade = estoque.length
+
+        if(quantidade < 3){
+
+            mensagem = `Desse jeito, o Luffy devora até o navio`
+
+        } else if(quantidade < 7){
+
+            mensagem = `O comilão do Luffy não vai deixar sobrar nenhuma comida`
+
+        } else if(quantidade < 10){
+
+            mensagem = `Assim, talvez sobre um pouco para a tripulação`
+
+        } else{
+
+            mensagem = `Desse jeito vai ter comida para todo mundo e ainda consigo guardar um pouco para a senhorita Nami!`        
+        }
+
+        
+        p_mensagem.innerHTML = mensagem
+    }
+
+    function pesquisar(){
+        var produto_pesquisado = input_pesquisa.value
+        var existe = false
+        var quantidade = 0
+        var mensagem = ``
+
+        for(var i = 0; i < estoque.length; i++){
+            if(estoque[i] == produto_pesquisado){
+                existe = true
+                quantidade ++
+            }
+        }
+
+        if(existe){
+            mensagem = `Temos a comida ${produto_pesquisado} e há ${quantidade} unidade(s) dela`
+        } else {
+            mensagem = `Alguém vai ter que comprar ${produto_pesquisado}, tá fazendo falta...`
+        }
+
+        p_mensagem.innerHTML = mensagem
+    }
+
+    function exibir_estoque(){
+        var estoque_pesquisa = []
+        var qtd_estoque_pesquisa = []
+        var mensagem = ``
+
+        for(var i = 0; i < estoque.length; i++){
+            if(estoque_pesquisa.includes(estoque[i])){
+                for(var ii = 0; ii < estoque_pesquisa.length; ii++){
+                    if(estoque[i] == estoque_pesquisa[ii]){
+                        qtd_estoque_pesquisa[ii] += 1
+                    }
+                }
+            } else{
+                estoque_pesquisa.push(estoque[i]);
+                qtd_estoque_pesquisa.push(1);
+            }
+        }
+
+        for(var i = 0; i < estoque_pesquisa.length; i++){
+
+            var qtd_mensagem = `unidade`
+
+            if(qtd_estoque_pesquisa[i] > 1){
+                qtd_mensagem = `unidades`
+            }
+
+            mensagem += `- ${estoque_pesquisa[i]} (${qtd_estoque_pesquisa[i]} ${qtd_mensagem})<br>`
+        }
+
+        p_mensagem.innerHTML = mensagem
+
+    }
+
+    function alterar_nome(){
+        var nome_atual = input_nome_atual.value
+        var nome_novo = input_nome_novo.value
+        var existe = false
+        var mensagem = ``
+
+        for(var i = 0; i < estoque.length; i++){
+            if(estoque[i] == nome_atual){
+                existe = true
+                estoque[i] = nome_novo
+            }
+        }
+
+        if(existe){
+            mensagem = `A comida ${nome_atual} foi alterada para ${nome_novo}`
+
+        } else {
+            mensagem = `A comida ${nome_atual} não foi encontrada no estoque.`
+        }
+
+        p_mensagem.innerHTML = mensagem
+    }
+
+    function remover(){
+        var remover_estoque = []
+        var nome_produto = input_remover.value
+        var indice = -1
+        var existe = false
+        var mensagem = ``
+
+        for(var i = 0; i < estoque.length; i++){
+            if(estoque[i] == nome_produto){
+                existe = true
+                remover_estoque.push(i)
+            }
+        }
+
+        for(var i = remover_estoque.length; i >= 0; i--){
+            indice = remover_estoque[i]
+            estoque.splice(indice,1)
+        }
+
+        if(existe){
+            mensagem = `A comida ${nome_produto} foi removida do estoque.`
+        } else {
+            mensagem = `A comida ${nome_produto} não está no estoque.`
+        }
+
+        p_mensagem.innerHTML = mensagem
+    }
+    </script>

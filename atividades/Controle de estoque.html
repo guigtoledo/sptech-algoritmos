@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de estoque</title>
+</head>
+<body>
+    <h3>Controle de estoque</h3>
+    <p>Nome do produto</p>
+    <input type="text" id="input_produto">
+    <p>Código</p>
+    <input type="text" id="input_codigo">
+    <p>Quantidade</p>
+    <input type="number" id="input_quantidade">
+    <br><br>
+    <button onclick="cadastrar()">Cadastrar produto</button>
+    <button onclick="repor()">Repor estoque</button>
+    <button onclick="vender()">Vender produto</button>
+    <button onclick="relatorio()">Exibir relatório</button>
+    <button onclick="remover()">Remover produto</button>
+    <br><br>
+    <p id="p_mensagem"></p>
+</body>
+</html>
+<script>
+
+    var produto = []
+    var codigo = []
+    var quantidade = []
+    var vendas = []
+
+    function cadastrar() { 
+
+        var novo_produto = input_produto.value
+        var novo_codigo = input_codigo.value
+        var nova_quantidade = Number(input_quantidade.value)
+
+        var combinacao = false
+        var codigo_existe = false
+
+        var mensagem = ``
+
+        if(novo_produto != `` && novo_codigo != `` && nova_quantidade != ``){
+          
+            for(var i = 0; i < produto.length; i++){
+                
+                if((novo_produto == produto[i]) && (novo_codigo == codigo[i])){
+
+                    combinacao = true
+                    mensagem = `Produto já foi cadastrado. Venda ou reponha o estoque se desejar.`
+                    break
+                }
+            }
+        
+            if(combinacao == false){
+
+                for(var i = 0; i < produto.length; i++){
+
+                    if(novo_codigo == codigo[i]){
+
+                        codigo_existe = true
+                        mensagem = `Código do produto já existente.`
+                        break
+                    }
+                }
+
+                if(codigo_existe == false){
+
+                    produto.push(novo_produto)
+                    codigo.push(novo_codigo)
+                    quantidade.push(nova_quantidade)
+                    vendas.push(0)
+                    mensagem = `Produto ${novo_produto} cadastrado com sucesso!`
+                }
+            }
+
+        } else {
+
+            mensagem = `Preencha todos os campos para registrar um novo produto.`
+        }
+
+        p_mensagem.innerHTML = mensagem
+    }
+    function repor() {
+
+        var novo_produto = input_produto.value
+        var novo_codigo = input_codigo.value
+        var nova_quantidade = Number(input_quantidade.value)
+
+        var combinacao = false
+        var mensagem = ``
+        var estoque = ``
+
+        if(novo_produto != `` && novo_codigo != `` && nova_quantidade != `` && nova_quantidade > 0){
+
+            for(var i = 0; i < produto.length; i++){
+
+                if(novo_produto == produto[i] && novo_codigo == codigo[i]){
+
+                    quantidade[i] += nova_quantidade
+                    combinacao = true
+
+                    if(quantidade[i] < 10){
+
+                        estoque = `Precisa repor`
+                    } else {
+
+                        estoque = `OK`
+                    }
+
+                    mensagem = `${nova_quantidade} de ${produto[i]} foi reposto com sucesso.
+                                <br><br>Código: ${codigo[i]} | Produto: ${produto[i]} | Quantidade em Estoque: ${quantidade[i]} (${estoque})` 
+                    break
+                }
+            }
+
+            if(combinacao == false){
+
+                mensagem = `Produto não encontrado.`
+            }
+
+        }else {
+
+            mensagem = `Preencha todos os campos corretamente para repor um produto.`
+        }
+
+        p_mensagem.innerHTML = mensagem
+    }
+    function vender() {
+
+        var produto_venda = input_produto.value
+        var codigo_produto = input_codigo.value
+        var quantidade_venda = Number(input_quantidade.value)
+
+        var combinacao = false
+        var mensagem = ``
+
+        if(produto_venda != `` && codigo_produto != `` && quantidade_venda != `` && quantidade_venda > 0){
+
+            for(var i = 0; i < produto.length; i++){
+
+                if(produto_venda == produto[i] && codigo_produto == codigo[i]){
+
+                    if(quantidade_venda <= quantidade[i]){
+
+                        quantidade[i] -= quantidade_venda
+                        vendas[i] += quantidade_venda
+
+                        if(quantidade[i] < 10){
+
+                            estoque = `Precisa repor`
+                        } else {
+
+                            estoque = `OK`
+                        }
+
+                        mensagem = `${quantidade_venda} do ${produto[i]} foi vendido com sucesso
+                        <br><br>Código: ${codigo[i]} | Produto: ${produto[i]} | Quantidade em Estoque: ${quantidade[i]} (${estoque})`
+                        break
+                    } else {
+
+                        mensagem = `Quantidade inválida.`
+                    }
+                } else {
+
+                    mensagem = `Produto não encontrado.`
+                }
+            }
+        } else {
+
+            mensagem = `Preencha todos os campos corretamente para vender um produto.`
+        }
+        p_mensagem.innerHTML = mensagem        
+    }
+    function relatorio() {
+
+        var mensagem = ``
+        var max_estoque = quantidade[0]
+        var prod_max_estoque = produto[0]
+        var min_estoque = quantidade[0]
+        var prod_min_estoque = produto[0]
+        var mais_vendido = vendas[0]
+        var prod_mais_vendido = produto[0]
+        var menos_vendido = vendas[0]
+        var prod_menos_vendido = produto[0]
+
+        for(var i = 0; i < produto.length; i++){
+
+            var estoque = ``
+
+            if(quantidade[i] < 10){
+                estoque = `Precisa repor`
+            } else {
+                estoque = `Ok`
+            }
+
+            if(quantidade[i] > max_estoque){
+                max_estoque = quantidade[i]
+                prod_max_estoque = produto[i]
+            }
+
+            if(quantidade[i] < min_estoque){
+                min_estoque = quantidade[i]
+                prod_min_estoque = produto[i]
+            }
+
+            if(vendas[i] > mais_vendido){
+                mais_vendido = vendas[i]
+                prod_mais_vendido = produto[i]
+            }
+
+            if(vendas[i] < menos_vendido){
+                menos_vendido = vendas[i]
+                prod_menos_vendido = produto[i]
+            }
+
+            mensagem += `Código: ${codigo[i]} | Produto: ${produto[i]} | Quantidade em Estoque: ${quantidade[i]} (${estoque})<br><br>`
+        }
+
+        mensagem += `Produto com mais quantidade em estoque: ${prod_max_estoque}
+            <br><br> Produto com menos quantidade em estoque: ${prod_min_estoque}
+            <br><br> Produto mais vendido: ${prod_mais_vendido} (${mais_vendido})
+            <br><br> Produto menos vendido: ${prod_menos_vendido} (${menos_vendido})`
+
+        p_mensagem.innerHTML = mensagem
+    }    
+    function remover(){
+        var nome_produto = input_produto.value
+        var codigo_produto = input_codigo.value
+        var combinacao = false
+        var mensagem = ``
+
+        if(nome_produto != `` && codigo_produto != ``){
+
+            for(var i = 0; i < produto.length; i++){
+
+                if(nome_produto == produto[i] && codigo_produto == codigo[i]){
+                    produto.splice(i,1)
+                    combinacao = true
+                    break
+                }
+            }
+
+            if(combinacao){
+                mensagem = `Produto removido com sucesso.`
+            } else {
+                mensagem = `produto não encontrado.`
+            }
+
+            p_mensagem.innerHTML = mensagem        
+        }
+    }
+
+</script>
